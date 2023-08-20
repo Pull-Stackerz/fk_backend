@@ -1,5 +1,6 @@
 import Replicate from "replicate";
 const axios = require("axios");
+const translate = require("google-translate-api");
 const app = express();
 
 const replicate = new Replicate({
@@ -62,6 +63,20 @@ const userRespone = async (userIntitialChat, resultFromMlModel) =>
     return completion.title || "";
 }
 
+const languageTranslation = async (initialText) =>
+{
+    try
+    {
+        const translated = JSON.stringify(await translate(initialText, { to: "en" }));
+        return translated.text
+    }
+    catch
+    {
+        console.log("error in the api of google ");
+        return initialText
+    }
+}
+
 const parameterExt = async (req, res) => {
     const initialInput = req.body.initialInput;
     // const outfitRequest = req.body.outfitRequest;
@@ -71,8 +86,9 @@ const parameterExt = async (req, res) => {
     }
 
     try {
-         const apiUrl =process.env.apiUrl; // Replace with the actual API endpoint URL of place where ml model is hosted 
-         const stylePreference = await generateStylePreference(initialInput); 
+        const apiUrl = process.env.apiUrl; // Replace with the actual API endpoint URL of place where ml model is hosted 
+        const translatedInput = languageTranslation(initialInput);
+         const stylePreference = await generateStylePreference(translatedInput); 
          const data = {
              stylePreference,
          };
