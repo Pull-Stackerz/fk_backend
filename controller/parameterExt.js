@@ -6,15 +6,6 @@ const replicate = new Replicate({
     auth: process.env.REPLICATE_API_TOKEN,
 });
 
-const output = await replicate.run(
-    "replicate/llama-2-70b-chat:58d078176e02c219e11eb4da5a02a7830a283b14cf8f94537af893ccff5ee781",
-    {
-        input: {
-            prompt: "...",
-        },
-    }
-);
-
 const generateStylePreference = async (input) => {
     const replicate = new Replicate({
         auth: process.env.REPLICATE_API_TOKEN,
