@@ -1,0 +1,28 @@
+# Node.js / Express
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn.lock
+
+# Environment variables
+.env
+
+# Logs
+logs/
+*.log
+
+# Dependency directories
+pids/
+*.pid
+
+# Output of 'npm build'
+build/
+
+# Editor specific files
+.vscode/
+.idea/
+
+# Miscellaneous
+*.swp
+.DS_Store
+Thumbs.db
